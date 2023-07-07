@@ -7,33 +7,33 @@ namespace Utilities
     {
         [SerializeField] private List<GameObject> objectList;
         [SerializeField] private int initialPoolSize;
-        private Dictionary<string, Queue<GameObject>> objectQueues;
+        private Dictionary<ObjectTypes.Type, Queue<GameObject>> objectQueues;
 
         private void Start()
         {
-            objectQueues = new Dictionary<string, Queue<GameObject>>();
+            objectQueues = new Dictionary<ObjectTypes.Type, Queue<GameObject>>();
 
             foreach (GameObject obj in objectList)
             {
-                string tag = obj.tag;
+                ObjectTypes objectType = obj.GetComponent<ObjectTypes>();
 
-                if (!objectQueues.ContainsKey(tag))
-                    objectQueues.Add(tag, new Queue<GameObject>());
+                if (!objectQueues.ContainsKey(objectType.objectType))
+                    objectQueues.Add(objectType.objectType, new Queue<GameObject>());
 
                 for (int i = 0; i < initialPoolSize; i++)
                 {
                     GameObject newObj = Instantiate(obj);
                     newObj.SetActive(false);
-                    objectQueues[tag].Enqueue(newObj);
+                    objectQueues[objectType.objectType].Enqueue(newObj);
                 }
             }
         }
 
-        public GameObject GetPooledObject(string tag)
+        public GameObject GetPooledObject(ObjectTypes.Type objectType)
         {
-            if (objectQueues.ContainsKey(tag) && objectQueues[tag].Count > 0)
+            if (objectQueues.ContainsKey(objectType) && objectQueues[objectType].Count > 0)
             {
-                GameObject obj = objectQueues[tag].Dequeue();
+                GameObject obj = objectQueues[objectType].Dequeue();
                 obj.SetActive(true);
                 return obj;
             }
@@ -43,9 +43,9 @@ namespace Utilities
 
         public void ReturnToPool(GameObject obj)
         {
-            string tag = obj.tag;
+            ObjectTypes objectType = obj.GetComponent<ObjectTypes>();
             obj.SetActive(false);
-            objectQueues[tag].Enqueue(obj);
+            objectQueues[objectType.objectType].Enqueue(obj);
         }
     }
 }

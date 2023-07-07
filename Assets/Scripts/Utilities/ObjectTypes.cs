@@ -4,16 +4,15 @@ namespace Utilities
 {
     public class ObjectTypes : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+      public enum Type
+      {
+          None,
+          Character,
+          DeadParticleEffect,
+          Coin
+          
+      }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+      public Type objectType;
     }
 }
