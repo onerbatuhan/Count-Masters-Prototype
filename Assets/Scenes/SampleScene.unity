@@ -410,6 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff47e75ecb8da484d8157339be5f43b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroy: 1
   objectList:
   - {fileID: 8405759987119060662, guid: 8e5af9324bacc8e479b8acdaf28c5cb6, type: 3}
   - {fileID: 1866815699313870165, guid: ddb29645539d94b4eb9a27f343bb8a98, type: 3}

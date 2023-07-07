@@ -1,6 +1,6 @@
 using System;
-using Pattern;
 using UnityEngine;
+using Utilities;
 
 namespace Animation
 {

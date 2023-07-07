@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Pattern
+namespace Utilities
 {
-    public class ObjectPool : MonoBehaviour
+    public class ObjectPool : Singleton<ObjectPool>
     {
         [SerializeField] private List<GameObject> objectList;
         [SerializeField] private int initialPoolSize;

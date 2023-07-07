@@ -1,5 +1,5 @@
-using Pattern;
 using UnityEngine;
+using Utilities;
 
 namespace Collectibles
 {
@@ -8,7 +8,10 @@ namespace Collectibles
         
         public void AddAmount(int currentValue)
         {
-            
+            for (int i = 0; i < currentValue; i++)
+            {
+                // ObjectPool.Instance.GetPooledObject();
+            }
         }
     }
 }
