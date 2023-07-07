@@ -12,9 +12,10 @@ namespace Movement
         [SerializeField] private float swerveSpeed;
         [SerializeField] private float swerveAmount;
         [SerializeField] private float transitionSpeed;
-        public float clampLimitPositive;
-        public float clampLimitNegative;
         public float speed;
+        public float clampLimitRight;
+        public float clampLimitLeft;
+        public float clamLimitOriginal;
         private Transform _movedObject;
         private float _targetSwerve;
         private bool _isSwerving;
@@ -23,8 +24,9 @@ namespace Movement
         private void Start()
         {
             _movedObject = PlayerManager.Instance.playersMovedObject;
-            clampLimitPositive = platformRoadObject.localScale.x / 2;
-            clampLimitNegative = clampLimitPositive;
+            clamLimitOriginal = platformRoadObject.localScale.x / 2;
+            clampLimitLeft = clamLimitOriginal;
+            clampLimitRight = clamLimitOriginal;
         }
 
         private void Update()
@@ -63,11 +65,11 @@ namespace Movement
             if (!_isSwerving) return;
             float mouseDeltaX = (Input.mousePosition.x - _lastMousePosition.x) * Time.deltaTime * swerveSpeed;
             float objectPosX = _movedObject.position.x;
-            if (objectPosX < clampLimitPositive && objectPosX > -clampLimitNegative || (objectPosX == clampLimitPositive && mouseDeltaX < 0) || (objectPosX == -clampLimitNegative && mouseDeltaX > 0))
+            if (objectPosX < clampLimitRight && objectPosX > -clampLimitLeft || (objectPosX == clampLimitRight && mouseDeltaX < 0) || (objectPosX == -clampLimitLeft && mouseDeltaX > 0))
             {
-                float targetSwerveClampLimitPositive = (platformRoadObject.localScale.x + clampLimitPositive) / 100;
-                float targetSwerveClampLimitNegative = (platformRoadObject.localScale.x + clampLimitNegative) / 100;
-                _targetSwerve = Mathf.Clamp(_targetSwerve, -targetSwerveClampLimitNegative,  targetSwerveClampLimitPositive);
+                float targetSwerveClampLimitRight = (platformRoadObject.localScale.x + clampLimitRight) / 100;
+                float targetSwerveClampLimitLeft = (platformRoadObject.localScale.x + clampLimitLeft) / 100;
+                _targetSwerve = Mathf.Clamp(_targetSwerve, -targetSwerveClampLimitLeft,  targetSwerveClampLimitRight);
                 _targetSwerve += mouseDeltaX / Screen.width;
             }
             
@@ -80,16 +82,20 @@ namespace Movement
             _movedObject.Translate(Vector3.forward * speed * Time.deltaTime);
             Vector3 newPosition = _movedObject.position;
             newPosition.x = Mathf.Lerp(newPosition.x, _targetSwerve * swerveAmount, Time.deltaTime * transitionSpeed);
-            newPosition.x = Mathf.Clamp(newPosition.x, -clampLimitNegative, clampLimitPositive);
+            newPosition.x = Mathf.Clamp(newPosition.x, -clampLimitLeft, clampLimitRight);
             _movedObject.position = newPosition;
         }
         
+        // TODO: Takım boyutu arttığında veya azaldığında, x yönünde sağa veya sola kaydırma değer limiti güncellenir.
         public void UpdateMovedObjectLimit()
         {
             GameObject objectWithHighestXRight = PlayerManager.Instance.playerList.OrderByDescending(obj => obj.transform.localPosition.x).First();
             GameObject objectWithHighestXLeft = PlayerManager.Instance.playerList.OrderByDescending(obj => obj.transform.localPosition.x).Last();
-            clampLimitPositive -=  Mathf.Abs(objectWithHighestXRight.transform.position.x - _movedObject.transform.position.x);
-            clampLimitNegative -=  Mathf.Abs(objectWithHighestXLeft.transform.position.x - _movedObject.transform.position.x);
+
+            clampLimitRight = clamLimitOriginal;
+            clampLimitLeft = clamLimitOriginal;
+            clampLimitRight -=  Mathf.Abs(objectWithHighestXRight.transform.position.x - _movedObject.transform.position.x);
+            clampLimitLeft -=  Mathf.Abs(objectWithHighestXLeft.transform.position.x - _movedObject.transform.position.x);
         }
     }
 }
