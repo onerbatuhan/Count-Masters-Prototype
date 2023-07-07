@@ -7,7 +7,6 @@ namespace Player
     public class PlayerSetup : MonoBehaviour
     {
         private PlayerManager _playerManager;
-        [SerializeField] private float radius = 1f;
         private void Start()
         {
             _playerManager = PlayerManager.Instance;
@@ -15,8 +14,19 @@ namespace Player
 
         public void PlayerConfigure(GameObject currentPlayerObject)
         {
-            currentPlayerObject.transform.SetParent(_playerManager.playersMovedObject);
-            currentPlayerObject.transform.position = _playerManager.playersMovedObject.position;
+            Transform playersMovedObject = _playerManager.playersMovedObject.transform;
+            currentPlayerObject.transform.SetParent(playersMovedObject);
+            PlayerSetTransform(currentPlayerObject,playersMovedObject);
+
         }
+
+        private void PlayerSetTransform(GameObject currentPlayerObject, Transform currentPlayersMovedObject)
+        {
+            Vector3 randomPosition = Random.insideUnitSphere*_playerManager.playerCloneRadiusValue;
+            Vector3 newPosition = currentPlayersMovedObject.position + randomPosition;
+            currentPlayerObject.transform.position = newPosition;
+        }
+        
     }
 }
+

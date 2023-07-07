@@ -2004,6 +2004,7 @@ GameObject:
   - component: {fileID: 9217903618623810572}
   - component: {fileID: 2957948324010915446}
   - component: {fileID: 855459698352329762}
+  - component: {fileID: 2574410331252542074}
   m_Layer: 0
   m_Name: Stickman
   m_TagString: Untagged
@@ -2059,6 +2060,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectType: 1
+--- !u!195 &2574410331252542074
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8405759987119060662}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.1
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.46
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &8505123781870183058
 GameObject:
   m_ObjectHideFlags: 0
