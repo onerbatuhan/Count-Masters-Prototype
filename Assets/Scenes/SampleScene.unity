@@ -217,6 +217,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &257153070 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8405759987119060662, guid: 8e5af9324bacc8e479b8acdaf28c5cb6, type: 3}
+  m_PrefabInstance: {fileID: 3828079094692005944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &549030909
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +703,8 @@ MonoBehaviour:
   dontDestroy: 1
   playersMovedObject: {fileID: 1189034459}
   playerCloneRadiusValue: 0.1
+  playerList:
+  - {fileID: 257153070}
 --- !u!1 &1712806299
 GameObject:
   m_ObjectHideFlags: 0

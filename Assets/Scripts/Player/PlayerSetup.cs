@@ -1,4 +1,6 @@
 using System;
+using Animation;
+using UnityEditor.Animations;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,6 +17,9 @@ namespace Player
         public void PlayerConfigure(GameObject currentPlayerObject)
         {
             Transform playersMovedObject = _playerManager.playersMovedObject.transform;
+             Animator playerAnimator = currentPlayerObject.GetComponent<Animator>();
+            _playerManager.playerList.Add(currentPlayerObject);
+            AnimationController.Instance.ChangeAnimation(AnimationController.AnimationType.Run,playerAnimator);
             currentPlayerObject.transform.SetParent(playersMovedObject);
             PlayerSetTransform(currentPlayerObject,playersMovedObject);
 
