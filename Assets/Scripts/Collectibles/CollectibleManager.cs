@@ -10,7 +10,7 @@ namespace Collectibles
         {
             for (int i = 0; i < currentValue; i++)
             {
-                // ObjectPool.Instance.GetPooledObject();
+                ObjectPool.Instance.GetPooledObject(ObjectTypes.Type.Character);
             }
         }
     }

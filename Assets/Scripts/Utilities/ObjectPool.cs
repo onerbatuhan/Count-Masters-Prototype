@@ -33,11 +33,27 @@ namespace Utilities
         {
             if (objectQueues.ContainsKey(objectType) && objectQueues[objectType].Count > 0)
             {
+                
                 GameObject obj = objectQueues[objectType].Dequeue();
                 obj.SetActive(true);
                 return obj;
             }
-
+            
+                GameObject newObj = Instantiate(GetPrefabByType(objectType));
+                newObj.SetActive(true);
+                return newObj;
+            
+        }
+        private GameObject GetPrefabByType(ObjectTypes.Type objectType)
+        {
+            foreach (GameObject obj in objectList)
+            {
+                ObjectTypes objectTypesScript = obj.GetComponent<ObjectTypes>();
+                if (objectTypesScript != null && objectTypesScript.objectType == objectType)
+                {
+                    return obj;
+                }
+            }
             return null;
         }
 

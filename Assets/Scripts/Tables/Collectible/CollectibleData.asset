@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CollectibleData
   m_EditorClassIdentifier: 
   collectibleType: 1
-  collectibleValue: 10
+  collectibleValue: 20

@@ -7,6 +7,7 @@ namespace Collectibles
     {
         private void OnTriggerEnter(Collider other)
         {
+           
             Collect(other.transform);
         }
 
