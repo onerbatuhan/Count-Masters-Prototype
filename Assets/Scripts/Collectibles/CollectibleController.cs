@@ -5,6 +5,12 @@ namespace Collectibles
 {
     public class CollectibleController : MonoBehaviour
     {
+        private CollectibleManager _collectibleManager;
+        private void Start()
+        {
+            _collectibleManager = CollectibleManager.Instance;
+        }
+
         private void OnTriggerEnter(Collider other)
         {
            
@@ -24,10 +30,10 @@ namespace Collectibles
                 case CollectibleItem.CollectibleType.None:
                     break;
                 case CollectibleItem.CollectibleType.Positive:
-                    CollectibleManager.Instance.AddAmount(collectibleItem.collectibleValue); //Şu anki listedeki human sayısı + bu değer.
+                    _collectibleManager.AddAmount(collectibleItem.collectibleValue); //Şu anki listedeki human sayısı + bu değer.
                     break;
                 case CollectibleItem.CollectibleType.Multiplier:
-                    CollectibleManager.Instance.AddAmount(collectibleItem.collectibleValue); //Şu anki listedeki human sayısı * bu değer.
+                    _collectibleManager.AddAmount(collectibleItem.collectibleValue); //Şu anki listedeki human sayısı * bu değer.
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
