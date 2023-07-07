@@ -59,7 +59,6 @@ namespace Movement
             if (objectPosX < clampLimit && objectPosX > -clampLimit || (objectPosX == clampLimit && mouseDeltaX < 0) || (objectPosX == -clampLimit && mouseDeltaX > 0))
             {
                 float targetSwerveClampLimit = (platformRoadObject.localScale.x + clampLimit) / 100;
-                Debug.Log(targetSwerveClampLimit);
                 _targetSwerve = Mathf.Clamp(_targetSwerve, -targetSwerveClampLimit,  targetSwerveClampLimit);
                 _targetSwerve += mouseDeltaX / Screen.width;
             }

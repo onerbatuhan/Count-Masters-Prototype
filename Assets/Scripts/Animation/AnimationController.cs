@@ -1,5 +1,5 @@
 using System;
-using DesignPattern;
+using Pattern;
 using UnityEngine;
 
 namespace Animation
