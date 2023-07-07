@@ -1,42 +1,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool : MonoBehaviour
+namespace Pattern
 {
-    [SerializeField] private GameObject prefab;
-    [SerializeField] private int poolSize = 10;
-
-    private Queue<GameObject> objectQueue;
-
-    private void Start()
+    public class ObjectPool : MonoBehaviour
     {
-        objectQueue = new Queue<GameObject>();
+        [SerializeField] private List<GameObject> objectList;
+        [SerializeField] private int initialPoolSize;
+        private Dictionary<string, Queue<GameObject>> objectQueues;
 
-        for (int i = 0; i < poolSize; i++)
+        private void Start()
         {
-            GameObject obj = Instantiate(prefab);
+            objectQueues = new Dictionary<string, Queue<GameObject>>();
+
+            foreach (GameObject obj in objectList)
+            {
+                string tag = obj.tag;
+
+                if (!objectQueues.ContainsKey(tag))
+                    objectQueues.Add(tag, new Queue<GameObject>());
+
+                for (int i = 0; i < initialPoolSize; i++)
+                {
+                    GameObject newObj = Instantiate(obj);
+                    newObj.SetActive(false);
+                    objectQueues[tag].Enqueue(newObj);
+                }
+            }
+        }
+
+        public GameObject GetPooledObject(string tag)
+        {
+            if (objectQueues.ContainsKey(tag) && objectQueues[tag].Count > 0)
+            {
+                GameObject obj = objectQueues[tag].Dequeue();
+                obj.SetActive(true);
+                return obj;
+            }
+
+            return null;
+        }
+
+        public void ReturnToPool(GameObject obj)
+        {
+            string tag = obj.tag;
             obj.SetActive(false);
-            objectQueue.Enqueue(obj);
+            objectQueues[tag].Enqueue(obj);
         }
-    }
-
-    public GameObject GetPooledObject()
-    {
-        if (objectQueue.Count == 0)
-        {
-            GameObject newObj = Instantiate(prefab);
-            newObj.SetActive(false);
-            return newObj;
-        }
-        
-        GameObject pooledObj = objectQueue.Dequeue();
-        pooledObj.SetActive(true);
-        return pooledObj;
-    }
-
-    public void ReturnToPool(GameObject obj)
-    {
-        obj.SetActive(false);
-        objectQueue.Enqueue(obj);
     }
 }
