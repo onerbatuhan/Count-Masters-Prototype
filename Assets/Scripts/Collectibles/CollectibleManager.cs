@@ -1,4 +1,5 @@
 using System;
+using Movement;
 using Player;
 using UnityEngine;
 using Utilities;
@@ -21,6 +22,7 @@ namespace Collectibles
                 playerSetup.PlayerConfigure(_objectPool.GetPooledObject(ObjectTypes.Type.Character));
                 
             }
+            SwerveController.Instance.Invoke("UpdateMovedObjectLimit",.1f);
         }
     }
 }

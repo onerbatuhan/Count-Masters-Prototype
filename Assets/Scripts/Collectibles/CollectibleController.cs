@@ -1,4 +1,5 @@
 using System;
+using Player;
 using UnityEngine;
 
 namespace Collectibles
@@ -30,10 +31,10 @@ namespace Collectibles
                 case CollectibleItem.CollectibleType.None:
                     break;
                 case CollectibleItem.CollectibleType.Positive:
-                    _collectibleManager.AddAmount(collectibleItem.collectibleValue); //Şu anki listedeki human sayısı + bu değer.
+                    _collectibleManager.AddAmount(collectibleItem.collectibleValue); 
                     break;
                 case CollectibleItem.CollectibleType.Multiplier:
-                    _collectibleManager.AddAmount(collectibleItem.collectibleValue); //Şu anki listedeki human sayısı * bu değer.
+                    _collectibleManager.AddAmount(collectibleItem.collectibleValue * PlayerManager.Instance.playerList.Count);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

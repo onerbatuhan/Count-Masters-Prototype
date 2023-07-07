@@ -824,11 +824,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621743b2c980fb946a9261af00422076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroy: 1
   platformRoadObject: {fileID: 1240403009}
   swerveSpeed: 50
   swerveAmount: 35
   transitionSpeed: 8
-  clampLimit: 2
+  clampLimitPositive: 2
+  clampLimitNegative: 2
   speed: 2
 --- !u!1001 &1192158873613076357
 PrefabInstance:

@@ -16,7 +16,7 @@ namespace Player
 
         public void PlayerConfigure(GameObject currentPlayerObject)
         {
-            Transform playersMovedObject = _playerManager.playersMovedObject.transform;
+             Transform playersMovedObject = _playerManager.playersMovedObject.transform;
              Animator playerAnimator = currentPlayerObject.GetComponent<Animator>();
             _playerManager.playerList.Add(currentPlayerObject);
             AnimationController.Instance.ChangeAnimation(AnimationController.AnimationType.Run,playerAnimator);
