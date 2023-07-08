@@ -50,5 +50,15 @@ namespace Movement
             rigidBody.useGravity = useGravity;
             capsuleCollider.isTrigger = isTrigger;
         }
+
+        private void DetectFallingObjects()
+        {
+            // float threshold = referenceHeight * 2f;
+            //
+            // if (transform.position.y < threshold)
+            // {
+            //     Debug.Log("Y Position: " + transform.position.y);
+            // }
+        }
     }
 }

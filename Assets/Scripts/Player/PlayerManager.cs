@@ -10,6 +10,7 @@ namespace Player
     public class PlayerManager : Singleton<PlayerManager>
     {
          public Transform playersMovedObject;
+         public Transform playerMovementPath;
          public float playerCloneRadiusValue;
          public List<GameObject> playerList;
          public TextMeshPro playerCounterText;

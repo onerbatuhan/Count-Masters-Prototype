@@ -1019,6 +1019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroy: 1
   playersMovedObject: {fileID: 1189034459}
+  playerMovementPath: {fileID: 1240403009}
   playerCloneRadiusValue: 0.1
   playerList:
   - {fileID: 257153070}
@@ -1209,7 +1210,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 1
-  platformRoadObject: {fileID: 1240403009}
   swerveSpeed: 50
   swerveAmount: 35
   transitionSpeed: 8
