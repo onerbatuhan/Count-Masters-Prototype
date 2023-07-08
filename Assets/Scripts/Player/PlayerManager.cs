@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Movement;
+using TMPro;
 using UnityEngine;
 using Utilities;
 
@@ -11,8 +12,12 @@ namespace Player
          public Transform playersMovedObject;
          public float playerCloneRadiusValue;
          public List<GameObject> playerList;
+         public TextMeshPro playerCounterText;
+         public void UpdatePlayerCounter()
+         {
+             playerCounterText.text = playerList.Count.ToString();
+         }
 
 
-         
     }
 }
