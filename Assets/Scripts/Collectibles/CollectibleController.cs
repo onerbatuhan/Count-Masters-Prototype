@@ -1,6 +1,8 @@
 using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Player;
 using UnityEngine;
+using Utilities;
 
 namespace Collectibles
 {
@@ -14,8 +16,12 @@ namespace Collectibles
 
         private void OnTriggerEnter(Collider other)
         {
+            Collectible collectible;
+            if (other.gameObject.TryGetComponent(out collectible))
+            {
+                Collect(other.transform);
+            }
            
-            Collect(other.transform);
         }
 
         private void Collect(Transform currentCollectible)

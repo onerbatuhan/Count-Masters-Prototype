@@ -2005,6 +2005,8 @@ GameObject:
   - component: {fileID: 2957948324010915446}
   - component: {fileID: 855459698352329762}
   - component: {fileID: 2574410331252542074}
+  - component: {fileID: 5264922509985981400}
+  - component: {fileID: 3134518754610907121}
   m_Layer: 0
   m_Name: Stickman
   m_TagString: Untagged
@@ -2041,7 +2043,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a45046b9883ff194aac2371e14d408f2, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2082,6 +2084,36 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &5264922509985981400
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8405759987119060662}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.08433306
+  m_Height: 0.45718223
+  m_Direction: 1
+  m_Center: {x: -0.0013890266, y: 0.22965178, z: 0}
+--- !u!54 &3134518754610907121
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8405759987119060662}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
 --- !u!1 &8505123781870183058
 GameObject:
   m_ObjectHideFlags: 0
