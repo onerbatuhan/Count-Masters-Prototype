@@ -7,9 +7,10 @@ namespace Utilities
       public enum Type
       {
           None,
-          Character,
-          DeadParticleEffect,
-          Coin
+          Player,
+          Enemy
+          
+         
           
       }
 

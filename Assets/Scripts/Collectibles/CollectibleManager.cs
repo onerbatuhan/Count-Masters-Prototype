@@ -22,7 +22,7 @@ namespace Collectibles
         {
             for (int i = 0; i < currentValue; i++)
             {
-                playerSetup.PlayerConfigure(_objectPool.GetPooledObject(ObjectTypes.Type.Character));
+                playerSetup.PlayerConfigure(_objectPool.GetPooledObject(ObjectTypes.Type.Player));
                 
             }
             

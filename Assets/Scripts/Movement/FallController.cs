@@ -27,7 +27,7 @@ namespace Movement
         private void OnTriggerEnter(Collider other)
         {
             
-            if (!other.gameObject.TryGetComponent(out _objectTypes) || _objectTypes.objectType != ObjectTypes.Type.Character) return;
+            if (!other.gameObject.TryGetComponent(out _objectTypes) || _objectTypes.objectType != ObjectTypes.Type.Player) return;
             switch (fallState)
             {
                 case FallState.Preparation:
@@ -43,7 +43,7 @@ namespace Movement
 
         private void OnTriggerExit(Collider other)
         {
-            if (!other.gameObject.TryGetComponent(out _objectTypes) || _objectTypes.objectType != ObjectTypes.Type.Character) return;
+            if (!other.gameObject.TryGetComponent(out _objectTypes) || _objectTypes.objectType != ObjectTypes.Type.Player) return;
             switch (fallState)
             {
                 case FallState.Preparation:
