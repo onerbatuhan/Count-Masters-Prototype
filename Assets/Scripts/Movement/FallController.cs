@@ -70,7 +70,7 @@ namespace Movement
             _playerController = playerObject.GetComponent<PlayerController>();
             _playerController.fallIsControllable = false;
             _playerManager.SetPlayerProperties(playerObject,navmeshEnable: true, useGravity: false, isTrigger: true);
-           
+
         }
 
         
