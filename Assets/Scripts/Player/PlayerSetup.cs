@@ -18,7 +18,7 @@ namespace Player
         {
              Transform playersMovedObject = _playerManager.playersMovedObject.transform;
              Animator playerAnimator = currentPlayerObject.GetComponent<Animator>();
-            _playerManager.playerList.Add(currentPlayerObject);
+            _playerManager.AddPlayer(currentPlayerObject);
             AnimationController.Instance.ChangeAnimation(AnimationController.AnimationType.Run,playerAnimator);
             currentPlayerObject.transform.SetParent(playersMovedObject);
             PlayerSetTransform(currentPlayerObject,playersMovedObject);

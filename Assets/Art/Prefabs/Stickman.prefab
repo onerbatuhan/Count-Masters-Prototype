@@ -2007,6 +2007,7 @@ GameObject:
   - component: {fileID: 2574410331252542074}
   - component: {fileID: 5264922509985981400}
   - component: {fileID: 3134518754610907121}
+  - component: {fileID: 5088365925553304736}
   m_Layer: 0
   m_Name: Stickman
   m_TagString: Untagged
@@ -2114,6 +2115,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 1
+--- !u!114 &5088365925553304736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8405759987119060662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ad88311f9738e45ae7a7a9e029fd40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallIsControllable: 0
 --- !u!1 &8505123781870183058
 GameObject:
   m_ObjectHideFlags: 0

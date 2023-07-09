@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Utilities
 {
@@ -57,11 +59,14 @@ namespace Utilities
             return null;
         }
 
-        public void ReturnToPool(GameObject obj)
+        public void ReturnToPool(GameObject currentObject)
         {
-            ObjectTypes objectType = obj.GetComponent<ObjectTypes>();
-            obj.SetActive(false);
-            objectQueues[objectType.objectType].Enqueue(obj);
+            ObjectTypes objectType = currentObject.GetComponent<ObjectTypes>();
+            
+            currentObject.SetActive(false);
+            objectQueues[objectType.objectType].Enqueue(currentObject);
         }
+        
+        
     }
 }
