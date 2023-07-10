@@ -65,6 +65,7 @@ namespace Enemy
         private void CreateEnemyGroup()
         {
             _enemyGroupObject = Instantiate(referenceObject);
+            _enemyGroupObject.GetComponent<EnemyController>().enemyCount = enemyCount;
             _enemyGroupObject.transform.position = transform.position;
         }
     }

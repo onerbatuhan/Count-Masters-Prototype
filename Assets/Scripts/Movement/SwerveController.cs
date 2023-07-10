@@ -56,7 +56,7 @@ namespace Movement
             _lastMousePosition = Input.mousePosition;
         }
 
-        private void StopSwerving()
+        public void StopSwerving()
         {
             _isSwerving = false;
         }
