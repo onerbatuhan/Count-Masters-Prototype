@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Attack;
 using Enemy;
 using Movement;
@@ -19,8 +20,9 @@ namespace Player
             _swerveController = SwerveController.Instance;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
+          
             CheckAttackCollision(other.gameObject);
             
         }
@@ -36,18 +38,45 @@ namespace Player
         public void StartAttack()
         {
             _swerveController.speed = 0;
-            _swerveController.StopSwerving();
+            // _swerveController.StopSwerving();
         }
+
         
+
         public void TargetAttack(Transform targetTransform)
         {
-            
-            foreach (var player in  _playerManager.playerList)
+           
+            EnemyController enemyController = targetTransform.GetComponent<EnemyController>();
+            Transform closestPlayer = GetClosestPlayer(enemyController);
+            if (closestPlayer != null)
             {
-                player.GetComponent<NavMeshAgent>().SetDestination(targetTransform.position);
-                
+                foreach (var player in _playerManager.playerList)
+                {
+                    player.GetComponent<NavMeshAgent>().SetDestination(closestPlayer.position);
+                }
             }
            
+        }
+
+        private Transform GetClosestPlayer(EnemyController enemyController)
+        {
+            List<GameObject> players = enemyController.enemyGroupList;
+
+            Transform closestPlayer = null;
+            float closestDistance = Mathf.Infinity;
+            Vector3 enemyPosition = transform.position;
+
+            foreach (GameObject player in players)
+            {
+                float distance = Vector3.Distance(player.transform.position, enemyPosition);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestPlayer = player.transform;
+                }
+            }
+
+            return closestPlayer;
         }
     }
 }

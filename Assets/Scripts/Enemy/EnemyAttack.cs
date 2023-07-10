@@ -23,7 +23,7 @@ namespace Enemy
 
         public void LaunchAttack(Transform objectToAttack)
         {
-            throw new System.NotImplementedException();
+            PlayerManager.Instance.RemovePlayer(objectToAttack.gameObject);
         }
     }
 }
