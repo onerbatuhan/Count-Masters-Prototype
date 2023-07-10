@@ -25,19 +25,36 @@ namespace Movement
                 {
                     gameObj.transform.SetParent(null);
                 }
-                GameObject farthestObject = _playerManager.playerList.OrderByDescending(obj => obj.transform.position.z).FirstOrDefault();
-                _playerManager.playersMovedObject.transform.DOMove(new Vector3(farthestObject.transform.position.x,_playerManager.playersMovedObject.position.y,farthestObject.transform.position.z), .2f).OnComplete((
+                 
+                GameObject middleObject = _playerManager.playerList.OrderBy(obj => Mathf.Abs(obj.transform.position.x - 0f)).FirstOrDefault();
+                Vector3 targetPosition = new Vector3(middleObject.transform.position.x, _playerManager.playersMovedObject.position.y, middleObject.transform.position.z);
+                _playerManager.playersMovedObject.transform.DOMove(targetPosition, .5f).OnUpdate((() =>
+                {
+                   
+                    foreach (GameObject gameObj in _playerManager.playerList)
+                    {
+                        // gameObj.transform.position = Vector3.MoveTowards(gameObj.transform.position,
+                        //     _playerManager.playersMovedObject.position, .2f);
+                    }
+                    
+                })).OnComplete((
                     () =>
                     {
                         foreach (GameObject gameObj in _playerManager.playerList)
                         {
+                            gameObj.GetComponent<NavMeshAgent>().ResetPath();
                             gameObj.transform.SetParent(_playerManager.playersMovedObject);
-                            
+
                         }
                         SwerveController.Instance.UpdateMovedObjectLimit();
                         SwerveController.Instance.ResetToOriginalValues();
-                        
                     }));
         }
+        
+       
+
+        
+
+        
     }
 }
