@@ -11,6 +11,7 @@ namespace Player
     public class PlayerAttackController : MonoBehaviour,IAttackController
     {
         private EnemyAttackController _enemyAttackController;
+        private EnemyController _enemyController;
         private PlayerManager _playerManager;
         private SwerveController _swerveController;
 
@@ -19,17 +20,20 @@ namespace Player
             _playerManager = PlayerManager.Instance;
             _swerveController = SwerveController.Instance;
         }
+        
 
         private void OnTriggerStay(Collider other)
         {
           
             CheckAttackCollision(other.gameObject);
-            
+            CheckAttackFinished(other.gameObject);
+
         }
         public void CheckAttackCollision(GameObject collidingObject)
         {
             if (collidingObject.TryGetComponent(out _enemyAttackController))
             {
+              
                 StartAttack();
                 TargetAttack(collidingObject.transform);
             }
@@ -41,7 +45,31 @@ namespace Player
             _swerveController.StopSwerving();
         }
 
-        
+        public void CheckAttackFinished(GameObject collidingObject)
+        {
+            if (!collidingObject.TryGetComponent(out _enemyAttackController)) return;
+            _enemyController = _enemyAttackController.GetComponent<EnemyController>();
+            if (_enemyController.enemyGroupList.Count == 0)
+            {
+                _enemyController.transform.gameObject.SetActive(false);
+                    FinishAttack();
+                    
+            }
+        }
+
+        public void FinishAttack()
+        {
+            _swerveController.ResetToOriginalValues();
+            _swerveController.StartSwerving();
+            _swerveController.UpdateMovedObjectLimit();
+            foreach (var player in _playerManager.playerList)
+            {
+                NavMeshAgent navMeshAgent = player.GetComponent<NavMeshAgent>();
+                navMeshAgent.ResetPath();
+            }
+
+        }
+
 
         public void TargetAttack(Transform targetTransform)
         {

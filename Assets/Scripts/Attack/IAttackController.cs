@@ -7,6 +7,8 @@ namespace Attack
     {
         void CheckAttackCollision(GameObject collidingObject);
         void StartAttack();
+        void CheckAttackFinished(GameObject collidingObject);
+        void FinishAttack();
 
         void TargetAttack(Transform targetTransform);
         public Transform GetClosestTransform(EnemyController enemyController = null);

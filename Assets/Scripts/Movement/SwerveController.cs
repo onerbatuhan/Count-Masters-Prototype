@@ -50,7 +50,7 @@ namespace Movement
             }
         }
 
-        private void StartSwerving()
+        public void StartSwerving()
         {
             _isSwerving = true;
             _lastMousePosition = Input.mousePosition;
@@ -59,6 +59,11 @@ namespace Movement
         public void StopSwerving()
         {
             _isSwerving = false;
+        }
+
+        public void ResetToOriginalValues()
+        {
+            speed = 2; //ScripttableObject değişkeninden alırsın.
         }
 
         private void UpdateSwerve()
