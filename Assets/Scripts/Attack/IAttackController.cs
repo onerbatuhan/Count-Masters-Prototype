@@ -1,3 +1,4 @@
+using Enemy;
 using UnityEngine;
 
 namespace Attack
@@ -8,6 +9,7 @@ namespace Attack
         void StartAttack();
 
         void TargetAttack(Transform targetTransform);
+        public Transform GetClosestTransform(EnemyController enemyController = null);
 
     }
 }

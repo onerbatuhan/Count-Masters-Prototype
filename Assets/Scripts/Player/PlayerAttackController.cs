@@ -47,7 +47,7 @@ namespace Player
         {
            
             EnemyController enemyController = targetTransform.GetComponent<EnemyController>();
-            Transform closestPlayer = GetClosestPlayer(enemyController);
+            Transform closestPlayer = GetClosestTransform(enemyController);
             if (closestPlayer != null)
             {
                 foreach (var player in _playerManager.playerList)
@@ -58,7 +58,7 @@ namespace Player
            
         }
 
-        private Transform GetClosestPlayer(EnemyController enemyController)
+        public Transform GetClosestTransform(EnemyController enemyController)
         {
             List<GameObject> players = enemyController.enemyGroupList;
 

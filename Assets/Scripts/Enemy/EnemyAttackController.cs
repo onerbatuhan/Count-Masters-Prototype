@@ -45,7 +45,7 @@ namespace Enemy
 
         public void TargetAttack(Transform targetTransform)
         {
-            Transform closestPlayer = GetClosestPlayer();
+            Transform closestPlayer = GetClosestTransform();
             if (closestPlayer != null)
             {
                 foreach (var enemy in _enemyController.enemyGroupList)
@@ -55,7 +55,7 @@ namespace Enemy
             }
         }
 
-        private Transform GetClosestPlayer()
+        public Transform GetClosestTransform(EnemyController enemyController = null)
         {
             List<GameObject> players = PlayerManager.Instance.playerList;
 
