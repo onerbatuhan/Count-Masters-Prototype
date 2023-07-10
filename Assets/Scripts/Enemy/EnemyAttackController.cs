@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Animation;
 using Attack;
 using Player;
 using UnityEngine;
@@ -11,10 +12,12 @@ namespace Enemy
     {
         private PlayerAttackController _playerAttackController;
         private EnemyController _enemyController;
+        private AnimationController _animationController;
 
         private void Start()
         {
             _enemyController = transform.GetComponent<EnemyController>();
+            _animationController = AnimationController.Instance;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -26,13 +29,18 @@ namespace Enemy
         {
             if (collidingObject.gameObject.TryGetComponent(out _playerAttackController))
             {
+                StartAttack();
                 TargetAttack(collidingObject.transform);
             }
         }
 
         public void StartAttack()
         {
-            
+            foreach (var enemy in _enemyController.enemyGroupList)
+            {
+                 Animator animator = enemy.GetComponent<Animator>();
+                _animationController.ChangeAnimation(AnimationController.AnimationType.Run,animator);
+            }
         }
 
         public void TargetAttack(Transform targetTransform)

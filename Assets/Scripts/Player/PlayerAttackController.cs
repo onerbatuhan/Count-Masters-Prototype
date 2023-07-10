@@ -38,7 +38,7 @@ namespace Player
         public void StartAttack()
         {
             _swerveController.speed = 0;
-            // _swerveController.StopSwerving();
+            _swerveController.StopSwerving();
         }
 
         
