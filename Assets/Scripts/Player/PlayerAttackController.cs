@@ -65,9 +65,8 @@ namespace Player
                 NavMeshAgent navMeshAgent = player.GetComponent<NavMeshAgent>();
                 navMeshAgent.ResetPath();
             }
-            _swerveController.ResetToOriginalValues();
-            _swerveController.StartSwerving();
-            _swerveController.UpdateMovedObjectLimit();
+            MovementManager.Instance.KeepPlayersClose();
+            
         }
 
 
