@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using Utilities;
 
 namespace Enemy
 {
@@ -11,11 +12,13 @@ namespace Enemy
         [SerializeField] private TextMeshPro enemyCounterText;
         private EnemyManager _enemyManager;
         private bool _hasEnteredUpdate = false;
+        private ObjectPool _objectPool;
         public int enemyCount;
         public List<GameObject> enemyGroupList;
         private void Start()
         {
             _enemyManager = EnemyManager.Instance;
+            _objectPool = ObjectPool.Instance;
             UpdateEnemyCounter();
         }
 
@@ -35,6 +38,9 @@ namespace Enemy
         public void RemoveEnemy(GameObject currentEnemyObject)
         {
             enemyGroupList.Remove(currentEnemyObject);
+            _objectPool.ReturnToPool(currentEnemyObject);
+            UpdateEnemyCounter();
+            
         }
         private void LateUpdate()
         {

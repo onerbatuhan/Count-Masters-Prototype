@@ -29,6 +29,8 @@ namespace Enemy
             EnemyController  enemyController = enemyGroupTransform.GetComponent<EnemyController>();
             enemyController.AddEnemy(currentEnemyObject);
             
+            currentEnemyObject.transform.SetParent(enemyGroupTransform);
+            
             Vector3 randomPosition = Random.insideUnitSphere*enemyCloneRadiusValue;
             Vector3 newPosition = enemyGroupTransform.position + randomPosition;
             currentEnemyObject.transform.position = newPosition;
