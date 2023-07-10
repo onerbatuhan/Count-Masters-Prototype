@@ -59,15 +59,15 @@ namespace Player
 
         public void FinishAttack()
         {
-            _swerveController.ResetToOriginalValues();
-            _swerveController.StartSwerving();
-            _swerveController.UpdateMovedObjectLimit();
+            
             foreach (var player in _playerManager.playerList)
             {
                 NavMeshAgent navMeshAgent = player.GetComponent<NavMeshAgent>();
                 navMeshAgent.ResetPath();
             }
-
+            _swerveController.ResetToOriginalValues();
+            _swerveController.StartSwerving();
+            _swerveController.UpdateMovedObjectLimit();
         }
 
 

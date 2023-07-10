@@ -1,12 +1,11 @@
 using System;
 using Player;
 using UnityEngine;
-using UnityEngine.AI;
 using Utilities;
 
-namespace Movement
+namespace Obstacles
 {
-    public class FallController : MonoBehaviour
+    public class ObstacleFallController : MonoBehaviour
     {
         
         private enum FallState
