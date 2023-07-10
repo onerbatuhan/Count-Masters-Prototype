@@ -30,12 +30,7 @@ namespace Movement
                 Vector3 targetPosition = new Vector3(middleObject.transform.position.x, _playerManager.playersMovedObject.position.y, middleObject.transform.position.z);
                 _playerManager.playersMovedObject.transform.DOMove(targetPosition, .5f).OnUpdate((() =>
                 {
-                   
-                    foreach (GameObject gameObj in _playerManager.playerList)
-                    {
-                        // gameObj.transform.position = Vector3.MoveTowards(gameObj.transform.position,
-                        //     _playerManager.playersMovedObject.position, .2f);
-                    }
+                    
                     
                 })).OnComplete((
                     () =>
