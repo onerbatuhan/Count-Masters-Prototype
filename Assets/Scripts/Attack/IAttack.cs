@@ -4,10 +4,7 @@ namespace Attack
 {
     public interface IAttack
     {
-        void CheckAttackCollision(GameObject collidingObject);
-        void StartAttack();
-
-        void TargetAttack(Transform targetTransform);
-
+        void CollisionCheck(GameObject collisionObject);
+        void LaunchAttack(Transform objectToAttack);
     }
 }

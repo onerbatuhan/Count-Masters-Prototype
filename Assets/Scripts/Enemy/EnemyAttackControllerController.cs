@@ -6,9 +6,9 @@ using UnityEngine.AI;
 
 namespace Enemy
 {
-    public class EnemyAttackController : MonoBehaviour,IAttack
+    public class EnemyAttackControllerController : MonoBehaviour,IAttackController
     {
-        private PlayerAttackController _playerAttackController;
+        private PlayerAttackControllerController _playerAttackControllerController;
         private EnemyController _enemyController;
 
         private void Start()
@@ -23,7 +23,7 @@ namespace Enemy
         
         public void CheckAttackCollision(GameObject collidingObject)
         {
-            if (collidingObject.gameObject.TryGetComponent(out _playerAttackController))
+            if (collidingObject.gameObject.TryGetComponent(out _playerAttackControllerController))
             {
                 TargetAttack(collidingObject.transform);
             }
