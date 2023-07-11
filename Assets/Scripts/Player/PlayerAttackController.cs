@@ -15,20 +15,33 @@ namespace Player
         private EnemyController _enemyController;
         private PlayerManager _playerManager;
         private SwerveController _swerveController;
+        private bool _isTriggerStayActive ;
 
         private void Start()
         {
             _playerManager = PlayerManager.Instance;
             _swerveController = SwerveController.Instance;
         }
-        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out _enemyAttackController))
+            {
+             foreach (GameObject gameObj in _playerManager.playerList)
+             {
+                gameObj.transform.SetParent(null);
+             }
+            }
+        }
 
         private void OnTriggerStay(Collider other)
         {
-          
-            CheckAttackCollision(other.gameObject);
-            CheckAttackFinished(other.gameObject);
-
+            if (!_isTriggerStayActive)
+            {
+                CheckAttackCollision(other.gameObject);
+                CheckAttackFinished(other.gameObject);
+            }
+            
         }
         public void CheckAttackCollision(GameObject collidingObject)
         {
@@ -44,6 +57,7 @@ namespace Player
         {
             _swerveController.speed = 0;
             _swerveController.StopSwerving();
+           
         }
 
         public void CheckAttackFinished(GameObject collidingObject)
@@ -60,14 +74,8 @@ namespace Player
 
         public void FinishAttack()
         {
-            
-            foreach (var player in _playerManager.playerList)
-            {
-                NavMeshAgent navMeshAgent = player.GetComponent<NavMeshAgent>();
-                navMeshAgent.ResetPath();
-            }
+            _isTriggerStayActive = true;
             MovementManager.Instance.KeepPlayersClose();
-            
         }
 
 

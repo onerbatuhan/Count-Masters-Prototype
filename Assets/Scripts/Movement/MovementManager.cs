@@ -21,34 +21,34 @@ namespace Movement
         public void KeepPlayersClose()
         {
            
-                foreach (GameObject gameObj in _playerManager.playerList)
-                {
-                    gameObj.transform.SetParent(null);
-                }
+            
                  
-                GameObject middleObject = _playerManager.playerList.OrderBy(obj => Mathf.Abs(obj.transform.position.x - 0f)).FirstOrDefault();
-                Vector3 targetPosition = new Vector3(middleObject.transform.position.x, _playerManager.playersMovedObject.position.y, middleObject.transform.position.z);
+               
+                
+                GameObject targetTransform = _playerManager.playerList.OrderByDescending(obj => obj.transform.position.z).FirstOrDefault();
+                
+                Vector3 targetPosition = new Vector3(targetTransform.transform.position.x, _playerManager.playersMovedObject.position.y, targetTransform.transform.position.z);
                 _playerManager.playersMovedObject.transform.DOMove(targetPosition, .5f).OnUpdate((() =>
                 {
-                    foreach (GameObject gameObj in _playerManager.playerList)
-                    {
-                        
-                        gameObj.transform.position = Vector3.MoveTowards(gameObj.transform.position,
-                            _playerManager.playersMovedObject.position, 1*Time.deltaTime);
-                       
-
-                    }
+                    // foreach (GameObject gameObj in _playerManager.playerList)
+                    // {
+                    //     
+                    //     gameObj.transform.position = Vector3.MoveTowards(gameObj.transform.position,
+                    //         _playerManager.playersMovedObject.position, 1*Time.deltaTime);
+                    //    
+                    //
+                    // }
                     
                 })).OnComplete((
                     () =>
                     {
-                        foreach (GameObject gameObj in _playerManager.playerList)
-                        {
-                            
-                            gameObj.transform.SetParent(_playerManager.playersMovedObject);
-                        }
-                        SwerveController.Instance.UpdateMovedObjectLimit();
-                        SwerveController.Instance.ResetToOriginalValues();
+                        // foreach (GameObject gameObj in _playerManager.playerList)
+                        // {
+                        //     
+                        //     gameObj.transform.SetParent(_playerManager.playersMovedObject);
+                        // }
+                        // SwerveController.Instance.UpdateMovedObjectLimit();
+                        // SwerveController.Instance.ResetToOriginalValues();
                     }));
         }
         
