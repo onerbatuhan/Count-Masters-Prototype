@@ -22,17 +22,7 @@ namespace Player
             _playerManager = PlayerManager.Instance;
             _swerveController = SwerveController.Instance;
         }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.TryGetComponent(out _enemyAttackController))
-            {
-             foreach (GameObject gameObj in _playerManager.playerList)
-             {
-                gameObj.transform.SetParent(null);
-             }
-            }
-        }
+        
 
         private void OnTriggerStay(Collider other)
         {

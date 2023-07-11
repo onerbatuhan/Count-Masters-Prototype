@@ -16,7 +16,6 @@ namespace Movement
         public float clampLimitRight;
         public float clampLimitLeft;
         public float clamLimitOriginal;
-        
         private float _targetSwerve;
         private bool _isSwerving;
         private Vector3 _lastMousePosition;
@@ -85,12 +84,24 @@ namespace Movement
 
         private void MoveObject()
         {
-            _playerManager.playersMovedObject.Translate(Vector3.forward * speed * Time.deltaTime);
-            Vector3 newPosition = _playerManager.playersMovedObject.position;
-            newPosition.x = Mathf.Lerp(newPosition.x, _targetSwerve * swerveAmount, Time.deltaTime * transitionSpeed);
-            newPosition.x = Mathf.Clamp(newPosition.x, -clampLimitLeft, clampLimitRight);
-            _playerManager.playersMovedObject.position = newPosition;
+               _playerManager.playersMovedObject.Translate(Vector3.forward * speed * Time.deltaTime);
+                Vector3 newPosition = _playerManager.playersMovedObject.position;
+                newPosition.x = Mathf.Lerp(newPosition.x, _targetSwerve * swerveAmount, Time.deltaTime * transitionSpeed);
+                newPosition.x = Mathf.Clamp(newPosition.x, -clampLimitLeft, clampLimitRight);
+                _playerManager.playersMovedObject.position = newPosition;
         }
+        
+        
+        
+        // TODO: _targetSwerve değerini, pozisyonu güncellenen _playerManager.playersMovedObject objesinin konumuna gelecek şekilde güncellenir.
+        public void UpdateTargetSwerve()
+        {
+            float newTargetSwerve = _playerManager.playersMovedObject.transform.position.x / swerveAmount;
+            _targetSwerve = newTargetSwerve;
+        }
+        
+        
+        
         
         // TODO: Takım boyutu arttığında veya azaldığında, x yönünde sağa veya sola kaydırma değer limiti güncellenir.
         public void UpdateMovedObjectLimit()

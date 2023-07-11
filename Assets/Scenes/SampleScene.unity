@@ -1758,10 +1758,11 @@ MonoBehaviour:
   swerveSpeed: 50
   swerveAmount: 35
   transitionSpeed: 8
-  speed: 2
+  speed: 5
   clampLimitRight: 0
   clampLimitLeft: 0
   clamLimitOriginal: 0
+  _targetSwerve: 0
 --- !u!1001 &2023912468
 PrefabInstance:
   m_ObjectHideFlags: 0
