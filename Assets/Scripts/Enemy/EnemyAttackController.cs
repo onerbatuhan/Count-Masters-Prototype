@@ -69,10 +69,10 @@ namespace Enemy
 
         public void TargetAttack(Transform targetTransform)
         {
-            foreach (var player in _enemyController.enemyGroupList)
+            GameObject targetObject = _playerManager.playerList.OrderByDescending(obj => obj.transform.position.z).FirstOrDefault();
+            foreach (var player in _enemyController.enemyGroupList.Where(player => targetObject != null))
             {
-                player.transform.position = Vector3.MoveTowards(player.transform.position,
-                        _playerManager.playersMovedObject.position, 1*Time.deltaTime);
+                player.transform.position = Vector3.MoveTowards(player.transform.position, targetObject.transform.position, 1*Time.deltaTime);
             }
         }
         

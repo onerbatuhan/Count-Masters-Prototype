@@ -73,18 +73,13 @@ namespace Player
 
         public void TargetAttack(Transform targetTransform)
         {
-           
             EnemyController enemyController = targetTransform.GetComponent<EnemyController>();
-            foreach (var player in _playerManager.playerList)
+            GameObject lowestZObject = enemyController.enemyGroupList.OrderByDescending(obj => obj.transform.position.z).FirstOrDefault();
+            foreach (var player in _playerManager.playerList.Where(player => lowestZObject != null))
             {
                 player.transform.position = Vector3.MoveTowards(player.transform.position,
-                        enemyController.transform.position, 1* Time.deltaTime);
+                    lowestZObject.transform.position, 1* Time.deltaTime);
             }
-
-           
-           
         }
-
-        
     }
 }
