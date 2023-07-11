@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Attack;
 using Enemy;
 using Movement;
@@ -74,36 +75,16 @@ namespace Player
         {
            
             EnemyController enemyController = targetTransform.GetComponent<EnemyController>();
-            Transform closestPlayer = GetClosestTransform(enemyController);
-            if (closestPlayer != null)
+            foreach (var player in _playerManager.playerList)
             {
-                foreach (var player in _playerManager.playerList)
-                {
-                    player.GetComponent<NavMeshAgent>().SetDestination(closestPlayer.position);
-                }
+                player.transform.position = Vector3.MoveTowards(player.transform.position,
+                        enemyController.transform.position, 1* Time.deltaTime);
             }
+
+           
            
         }
 
-        public Transform GetClosestTransform(EnemyController enemyController)
-        {
-            List<GameObject> players = enemyController.enemyGroupList;
-
-            Transform closestPlayer = null;
-            float closestDistance = Mathf.Infinity;
-            Vector3 enemyPosition = transform.position;
-
-            foreach (GameObject player in players)
-            {
-                float distance = Vector3.Distance(player.transform.position, enemyPosition);
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestPlayer = player.transform;
-                }
-            }
-
-            return closestPlayer;
-        }
+        
     }
 }

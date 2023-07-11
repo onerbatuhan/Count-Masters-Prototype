@@ -30,16 +30,22 @@ namespace Movement
                 Vector3 targetPosition = new Vector3(middleObject.transform.position.x, _playerManager.playersMovedObject.position.y, middleObject.transform.position.z);
                 _playerManager.playersMovedObject.transform.DOMove(targetPosition, .5f).OnUpdate((() =>
                 {
-                    
+                    foreach (GameObject gameObj in _playerManager.playerList)
+                    {
+                        
+                        gameObj.transform.position = Vector3.MoveTowards(gameObj.transform.position,
+                            _playerManager.playersMovedObject.position, 1*Time.deltaTime);
+                       
+
+                    }
                     
                 })).OnComplete((
                     () =>
                     {
                         foreach (GameObject gameObj in _playerManager.playerList)
                         {
-                            gameObj.GetComponent<NavMeshAgent>().ResetPath();
+                            
                             gameObj.transform.SetParent(_playerManager.playersMovedObject);
-
                         }
                         SwerveController.Instance.UpdateMovedObjectLimit();
                         SwerveController.Instance.ResetToOriginalValues();

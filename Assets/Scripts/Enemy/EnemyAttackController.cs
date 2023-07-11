@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Animation;
 using Attack;
 using Player;
@@ -24,11 +25,12 @@ namespace Enemy
 
         private void OnTriggerEnter(Collider other)
         {
-            CheckAttackCollision(other.gameObject);
+            
         }
 
         private void OnTriggerStay(Collider other)
         {
+            CheckAttackCollision(other.gameObject);
             CheckAttackFinished(other.gameObject);
         }
 
@@ -61,41 +63,18 @@ namespace Enemy
             foreach (var enemy in _enemyController.enemyGroupList)
             {
                 Animator animator = enemy.GetComponent<Animator>();
-                NavMeshAgent navMeshAgent = enemy.GetComponent<NavMeshAgent>();
-                navMeshAgent.ResetPath();
                 _animationController.ChangeAnimation(AnimationController.AnimationType.Idle,animator);
             }
         }
 
         public void TargetAttack(Transform targetTransform)
         {
-            Transform closestPlayer = GetClosestTransform();
-            if (closestPlayer == null) return;
-            foreach (var enemy in _enemyController.enemyGroupList)
+            foreach (var player in _enemyController.enemyGroupList)
             {
-                enemy.GetComponent<NavMeshAgent>().SetDestination(closestPlayer.position);
+                player.transform.position = Vector3.MoveTowards(player.transform.position,
+                        _playerManager.playersMovedObject.position, 1*Time.deltaTime);
             }
         }
-
-        public Transform GetClosestTransform(EnemyController enemyController = null)
-        {
-            List<GameObject> players = PlayerManager.Instance.playerList;
-
-            Transform closestPlayer = null;
-            float closestDistance = Mathf.Infinity;
-            Vector3 enemyPosition = transform.position;
-
-            foreach (GameObject player in players)
-            {
-                float distance = Vector3.Distance(player.transform.position, enemyPosition);
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestPlayer = player.transform;
-                }
-            }
-
-            return closestPlayer;
-        }
+        
     }
 }

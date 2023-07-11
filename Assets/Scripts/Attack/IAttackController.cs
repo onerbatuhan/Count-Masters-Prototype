@@ -11,7 +11,7 @@ namespace Attack
         void FinishAttack();
 
         void TargetAttack(Transform targetTransform);
-        public Transform GetClosestTransform(EnemyController enemyController = null);
+       
 
     }
 }
