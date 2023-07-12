@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Animation;
 using Attack;
+using Level;
 using Player;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,6 +16,7 @@ namespace Enemy
         private EnemyController _enemyController;
         private AnimationController _animationController;
         private PlayerManager _playerManager;
+        private bool _isTriggerStayDisabled;
 
         private void Start()
         {
@@ -22,22 +24,31 @@ namespace Enemy
             _animationController = AnimationController.Instance;
             _playerManager = PlayerManager.Instance;
         }
-        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.gameObject.TryGetComponent(out _playerAttackController)) return;
+            StartAttack();
+        }
+
         private void OnTriggerStay(Collider other)
         {
+            if(_isTriggerStayDisabled) return;
             CheckAttackCollision(other.gameObject);
             CheckAttackFinished(other.gameObject);
+            
         }
 
         public void CheckAttackCollision(GameObject collidingObject)
         {
             if (!collidingObject.gameObject.TryGetComponent(out _playerAttackController)) return;
-            StartAttack();
+            
             TargetAttack(collidingObject.transform);
         }
 
         public void StartAttack()
         {
+            
             foreach (var enemy in _enemyController.enemyGroupList)
             {
                  Animator animator = enemy.GetComponent<Animator>();
@@ -49,12 +60,15 @@ namespace Enemy
         {
             if (!collidingObject.gameObject.TryGetComponent(out _playerAttackController)) return;
             if (_playerManager.playerList.Count != 0) return;
+            _isTriggerStayDisabled = true;
             FinishAttack();
+            
 
         }
 
         public void FinishAttack()
         {
+            
             foreach (var enemy in _enemyController.enemyGroupList)
             {
                 Animator animator = enemy.GetComponent<Animator>();

@@ -31,49 +31,32 @@ namespace Obstacles
 
         private void OnTriggerEnter(Collider other)
         {
-           
-            if (!other.gameObject.TryGetComponent(out _objectTypes) || _objectTypes.objectType != ObjectTypes.Type.Player) return;
+            PreparationFilter(other.gameObject);
+        }
+
+        private void PreparationFilter(GameObject currentObject)
+        {
+            if (!currentObject.TryGetComponent(out _objectTypes) || _objectTypes.objectType != ObjectTypes.Type.Player) return;
             if (_triggerCounterLimit < _playerManager.playerList.Count)
             {
                 switch (fallState)
                 {
                     case FallState.Preparation:
-                        PrepareForFall(other.gameObject);
+                        PrepareForFall(currentObject);
                         break;
                     case FallState.ExitPreparation:
-                        Debug.Log("dd");
-                        ExitFallPreparation(other.gameObject);
+                        ExitFallPreparation(currentObject);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
                 _triggerCounterLimit++;
             }
-            
-            
-
         }
-
-        // private void OnTriggerExit(Collider other)
-        // {
-        //     if (!other.gameObject.TryGetComponent(out _objectTypes) || _objectTypes.objectType != ObjectTypes.Type.Player) return;
-        //     switch (fallState)
-        //     {
-        //         case FallState.Preparation:
-        //             PrepareForFall(other.gameObject);
-        //             
-        //             break;
-        //         case FallState.ExitPreparation:
-        //             ExitFallPreparation(other.gameObject);
-        //             break;
-        //         default:
-        //             throw new ArgumentOutOfRangeException();
-        //     }
-        // }
-
+        
         private void PrepareForFall(GameObject playerObject)
         {
-            Debug.Log("a");
+            
             _playerController = playerObject.GetComponent<PlayerController>();
             _playerController.fallIsControllable = true;
             _playerManager.SetPlayerProperties(playerObject, navmeshEnable: false, useGravity: true, isTrigger: false);

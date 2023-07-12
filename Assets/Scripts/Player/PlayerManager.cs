@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Level;
 using Movement;
 using Obstacles;
 using TMPro;
@@ -33,6 +34,11 @@ namespace Player
              _swerveController.UpdateMovedObjectLimit();
          }
 
+         public void RemovePlayerList(GameObject currentPlayerObject)
+         {
+             playerList.Remove(currentPlayerObject);
+         }
+
          public void AddPlayer(GameObject currentPlayerObject)
          {
              playerList.Add(currentPlayerObject);
@@ -41,6 +47,10 @@ namespace Player
          
          private void UpdatePlayerCounter()
          {
+             if (playerList.Count == 0)
+             {
+                 LevelManager.Instance.LevelFail();
+             }
              playerCounterText.text = playerList.Count.ToString();
          }
 

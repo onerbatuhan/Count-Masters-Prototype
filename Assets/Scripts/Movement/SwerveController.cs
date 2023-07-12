@@ -20,6 +20,7 @@ namespace Movement
         private bool _isSwerving;
         private Vector3 _lastMousePosition;
         private PlayerManager _playerManager;
+        private bool _canSwerve = true;
 
         private void Start()
         {
@@ -31,9 +32,11 @@ namespace Movement
 
         private void Update()
         {
-            HandleInput();
             MoveObject();
+            if (!_canSwerve) return;
+            HandleInput();
             UpdateSwerve();
+
         }
 
         
@@ -60,6 +63,20 @@ namespace Movement
             _isSwerving = false;
         }
 
+        public void SwervingClosing()
+        {
+            _canSwerve = false;
+        }
+
+        public void SwervingOpening()
+        {
+            _canSwerve = true;
+        }
+
+        public void SwerveValuesRefresh()
+        {
+            _targetSwerve = 0;
+        }
         public void ResetToOriginalValues()
         {
             speed = 2; //ScripttableObject değişkeninden alırsın.
@@ -106,6 +123,7 @@ namespace Movement
         // TODO: Takım boyutu arttığında veya azaldığında, x yönünde sağa veya sola kaydırma değer limiti güncellenir.
         public void UpdateMovedObjectLimit()
         {
+            if(_playerManager.playerList.Count <= 0) return;
             GameObject objectWithHighestXRight = _playerManager.playerList.OrderByDescending(obj => obj.transform.localPosition.x).First();
             GameObject objectWithHighestXLeft = _playerManager.playerList.OrderByDescending(obj => obj.transform.localPosition.x).Last();
 

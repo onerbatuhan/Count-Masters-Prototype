@@ -6,6 +6,7 @@ using Enemy;
 using Movement;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -15,7 +16,8 @@ namespace Player
         private EnemyController _enemyController;
         private PlayerManager _playerManager;
         private SwerveController _swerveController;
-        private bool _isTriggerStayActive ;
+        private bool _isTriggerStayDisabled;
+        public UnityEvent postAttackMovementEvent;
 
         private void Start()
         {
@@ -26,7 +28,7 @@ namespace Player
 
         private void OnTriggerStay(Collider other)
         {
-            if (!_isTriggerStayActive)
+            if (!_isTriggerStayDisabled)
             {
                 CheckAttackCollision(other.gameObject);
                 CheckAttackFinished(other.gameObject);
@@ -64,8 +66,8 @@ namespace Player
 
         public void FinishAttack()
         {
-            _isTriggerStayActive = true;
-            MovementManager.Instance.KeepPlayersClose();
+            _isTriggerStayDisabled = true;
+            postAttackMovementEvent.Invoke();
         }
 
 

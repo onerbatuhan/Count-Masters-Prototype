@@ -2,11 +2,10 @@ using System.Linq;
 using DG.Tweening;
 using Player;
 using UnityEngine;
-using Utilities;
 
 namespace Movement
 {
-    public class MovementManager : Singleton<MovementManager>
+    public class PostAttackMotionEvent : MonoBehaviour
     {
         
         private PlayerManager _playerManager;
@@ -17,9 +16,9 @@ namespace Movement
              _swerveController = SwerveController.Instance;
         }
 
-        public void KeepPlayersClose()
+        public void Execute() //UnityEvent
         {
-            DetachPlayersFromParent();
+            SetPlayersParent(null);
 
             GameObject targetPlayer = FindFarthestPlayer();
             Vector3 targetPosition = GetTargetPosition(targetPlayer);
@@ -31,19 +30,12 @@ namespace Movement
             }).OnComplete(() =>
             {
                 _swerveController.UpdateTargetSwerve();
-                SetPlayersParent();
+                SetPlayersParent(_playerManager.playersMovedObject);
                 _swerveController.UpdateMovedObjectLimit();
                 _swerveController.ResetToOriginalValues();
             });
         }
-
-        private void DetachPlayersFromParent()
-        {
-            foreach (GameObject player in _playerManager.playerList)
-            {
-                player.transform.SetParent(null);
-            }
-        }
+        
 
         private GameObject FindFarthestPlayer()
         {
@@ -63,11 +55,11 @@ namespace Movement
             }
         }
 
-        private void SetPlayersParent()
+        private void SetPlayersParent(Transform parent)
         {
             foreach (GameObject player in _playerManager.playerList)
             {
-                player.transform.SetParent(_playerManager.playersMovedObject);
+                player.transform.SetParent(parent);
             }
         }
     }

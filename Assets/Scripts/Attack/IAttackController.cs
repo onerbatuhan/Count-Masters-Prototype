@@ -5,6 +5,7 @@ namespace Attack
 {
     public interface IAttackController
     {
+        
         void CheckAttackCollision(GameObject collidingObject);
         void StartAttack();
         void CheckAttackFinished(GameObject collidingObject);
