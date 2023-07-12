@@ -15,10 +15,13 @@ namespace Obstacles
         private CollectibleController _collectibleController;
         public UnityEvent pyramidMotionEvent;
         private bool _cameraTarget;
+        private bool _canTrigger = true;
         private void OnTriggerEnter(Collider other)
         {
+            if (!_canTrigger) return;
             if (other.gameObject.TryGetComponent(out _collectibleController))
             {
+                _canTrigger = false;
                 cinemachineVirtualCamera.Priority = 11;
                 SwerveController.Instance.SwervingClosing();
                 SwerveController.Instance.SwerveValuesRefresh();

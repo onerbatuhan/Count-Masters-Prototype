@@ -1,4 +1,5 @@
 using System;
+using Player;
 using UnityEngine;
 using Utilities;
 
@@ -32,6 +33,14 @@ namespace Animation
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(animationType), animationType, null);
+            }
+        }
+
+        public void ChangeAnimationPlayers(AnimationType animationType)
+        {
+            foreach (var player in PlayerManager.Instance.playerList)
+            {
+               ChangeAnimation(animationType,player.GetComponent<Animator>());
             }
         }
     }

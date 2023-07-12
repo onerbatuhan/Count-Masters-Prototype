@@ -10,10 +10,12 @@ namespace Movement
         
         private PlayerManager _playerManager;
         private SwerveController _swerveController;
+        private PlayerAttackController _playerAttackController;
         private void Start()
         {
             _playerManager = PlayerManager.Instance;
              _swerveController = SwerveController.Instance;
+             _playerAttackController = _playerManager.playersMovedObject.GetComponent<PlayerAttackController>();
         }
 
         public void Execute() //UnityEvent
@@ -29,10 +31,13 @@ namespace Movement
                 MovePlayersToTarget(targetPosition);
             }).OnComplete(() =>
             {
+                
+                _playerAttackController.isTriggerStayDisabled = false;
                 _swerveController.UpdateTargetSwerve();
                 SetPlayersParent(_playerManager.playersMovedObject);
                 _swerveController.UpdateMovedObjectLimit();
                 _swerveController.ResetToOriginalValues();
+                _swerveController.SwervingOpening();
             });
         }
         

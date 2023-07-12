@@ -16,7 +16,7 @@ namespace Player
         private EnemyController _enemyController;
         private PlayerManager _playerManager;
         private SwerveController _swerveController;
-        private bool _isTriggerStayDisabled;
+        public bool isTriggerStayDisabled;
         public UnityEvent postAttackMovementEvent;
 
         private void Start()
@@ -28,7 +28,7 @@ namespace Player
 
         private void OnTriggerStay(Collider other)
         {
-            if (!_isTriggerStayDisabled)
+            if (!isTriggerStayDisabled)
             {
                 CheckAttackCollision(other.gameObject);
                 CheckAttackFinished(other.gameObject);
@@ -48,8 +48,8 @@ namespace Player
         public void StartAttack()
         {
             _swerveController.speed = 0;
-            _swerveController.StopSwerving();
-           
+            // _swerveController.StopSwerving();
+           _swerveController.SwervingClosing();
         }
 
         public void CheckAttackFinished(GameObject collidingObject)
@@ -66,7 +66,7 @@ namespace Player
 
         public void FinishAttack()
         {
-            _isTriggerStayDisabled = true;
+            isTriggerStayDisabled = true;
             postAttackMovementEvent.Invoke();
         }
 

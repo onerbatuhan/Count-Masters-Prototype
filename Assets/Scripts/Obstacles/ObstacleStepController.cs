@@ -20,7 +20,7 @@ namespace Obstacles
 
         private void OnTriggerEnter(Collider other)
         {
-            if (PlayerManager.Instance.playerList.Count < 1) return;
+            if (PlayerManager.Instance.playerList.Count !< 1) return;
             if (!other.gameObject.TryGetComponent(out _playerController)) return;
             other.transform.SetParent(null);
             _playerManager.RemovePlayerList(other.gameObject);

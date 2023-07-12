@@ -8,19 +8,20 @@ namespace Movement
 {
     public class SwerveController : Singleton<SwerveController>
     {
-       
-        [SerializeField] private float swerveSpeed;
-        [SerializeField] private float swerveAmount;
-        [SerializeField] private float transitionSpeed;
-        public float speed;
-        public float clampLimitRight;
-        public float clampLimitLeft;
-        public float clamLimitOriginal;
-        private float _targetSwerve;
-        private bool _isSwerving;
-        private Vector3 _lastMousePosition;
-        private PlayerManager _playerManager;
-        private bool _canSwerve = true;
+
+         public MovementItem movementData;
+         private float _swerveSpeed;
+         private float _swerveAmount;
+         private float _transitionSpeed;
+         private float _targetSwerve;
+         private bool _isSwerving;
+         private Vector3 _lastMousePosition;
+         private PlayerManager _playerManager;
+         private bool _canSwerve = true;
+        [HideInInspector] public float speed;
+        [HideInInspector] public float clampLimitRight;
+        [HideInInspector] public float clampLimitLeft;
+        [HideInInspector] public float clamLimitOriginal;
 
         private void Start()
         {
@@ -28,6 +29,10 @@ namespace Movement
             clamLimitOriginal = _playerManager.playerMovementPath.localScale.x / 2;
             clampLimitLeft = clamLimitOriginal;
             clampLimitRight = clamLimitOriginal;
+            _swerveSpeed = movementData.swerveSpeed;
+            _swerveAmount = movementData.swerveAmount;
+            _transitionSpeed = movementData.transitionSpeed;
+            speed = movementData.playerSpeed;
         }
 
         private void Update()
@@ -66,11 +71,13 @@ namespace Movement
         public void SwervingClosing()
         {
             _canSwerve = false;
+            StopSwerving();
         }
 
         public void SwervingOpening()
         {
             _canSwerve = true;
+            StartSwerving();
         }
 
         public void SwerveValuesRefresh()
@@ -79,13 +86,13 @@ namespace Movement
         }
         public void ResetToOriginalValues()
         {
-            speed = 2; //ScripttableObject değişkeninden alırsın.
+            speed = movementData.playerSpeed;
         }
 
         private void UpdateSwerve()
         {
             if (!_isSwerving) return;
-            float mouseDeltaX = (Input.mousePosition.x - _lastMousePosition.x) * Time.deltaTime * swerveSpeed;
+            float mouseDeltaX = (Input.mousePosition.x - _lastMousePosition.x) * Time.deltaTime * _swerveSpeed;
             float objectPosX = _playerManager.playersMovedObject.position.x;
             if (objectPosX < clampLimitRight && objectPosX > -clampLimitLeft || (objectPosX == clampLimitRight && mouseDeltaX < 0) || (objectPosX == -clampLimitLeft && mouseDeltaX > 0))
             {
@@ -103,7 +110,7 @@ namespace Movement
         {
                _playerManager.playersMovedObject.Translate(Vector3.forward * speed * Time.deltaTime);
                 Vector3 newPosition = _playerManager.playersMovedObject.position;
-                newPosition.x = Mathf.Lerp(newPosition.x, _targetSwerve * swerveAmount, Time.deltaTime * transitionSpeed);
+                newPosition.x = Mathf.Lerp(newPosition.x, _targetSwerve * _swerveAmount, Time.deltaTime * _transitionSpeed);
                 newPosition.x = Mathf.Clamp(newPosition.x, -clampLimitLeft, clampLimitRight);
                 _playerManager.playersMovedObject.position = newPosition;
         }
@@ -113,7 +120,7 @@ namespace Movement
         // TODO: _targetSwerve değerini, pozisyonu güncellenen _playerManager.playersMovedObject objesinin konumuna gelecek şekilde güncellenir.
         public void UpdateTargetSwerve()
         {
-            float newTargetSwerve = _playerManager.playersMovedObject.transform.position.x / swerveAmount;
+            float newTargetSwerve = _playerManager.playersMovedObject.transform.position.x / _swerveAmount;
             _targetSwerve = newTargetSwerve;
         }
         

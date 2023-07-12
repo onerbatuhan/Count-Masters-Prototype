@@ -41,7 +41,7 @@ namespace Collectibles
                     _collectibleManager.AddAmount(collectibleItem.collectibleValue); 
                     break;
                 case CollectibleItem.CollectibleType.Multiplier:
-                    _collectibleManager.AddAmount((collectibleItem.collectibleValue * PlayerManager.Instance.playerList.Count)/collectibleItem.collectibleValue);
+                    _collectibleManager.AddAmount((collectibleItem.collectibleValue * PlayerManager.Instance.playerList.Count) -PlayerManager.Instance.playerList.Count);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

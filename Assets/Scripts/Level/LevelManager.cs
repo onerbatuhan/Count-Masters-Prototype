@@ -1,5 +1,7 @@
 using System;
+using Animation;
 using Movement;
+using Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utilities;
@@ -34,7 +36,7 @@ namespace Level
         {
             levelStartUI.SetActive(false);
             _swerveController.enabled = true;
-            
+            AnimationController.Instance.ChangeAnimationPlayers(AnimationController.AnimationType.Run);
         }
         
         public void NextLevelClickEvent()
