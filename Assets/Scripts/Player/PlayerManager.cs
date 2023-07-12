@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Movement;
+using Obstacles;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
@@ -27,7 +28,7 @@ namespace Player
          {
              playerList.Remove(currentPlayerObject);
              ObjectPool.Instance.ReturnToPool(currentPlayerObject);
-             SetPlayerProperties(currentPlayerObject,true,false,true);
+             SetPlayerProperties(currentPlayerObject,true,false,false);
              UpdatePlayerCounter();
              _swerveController.UpdateMovedObjectLimit();
          }
@@ -48,10 +49,10 @@ namespace Player
              Rigidbody rigidBody = playerObject.GetComponent<Rigidbody>();
              CapsuleCollider capsuleCollider = playerObject.GetComponent<CapsuleCollider>();
              NavMeshAgent navMeshAgent = playerObject.GetComponent<NavMeshAgent>();
-
              navMeshAgent.enabled = navmeshEnable;
              rigidBody.useGravity = useGravity;
              capsuleCollider.isTrigger = isTrigger;
+
          }
 
 

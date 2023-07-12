@@ -22,12 +22,7 @@ namespace Enemy
             _animationController = AnimationController.Instance;
             _playerManager = PlayerManager.Instance;
         }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            
-        }
-
+        
         private void OnTriggerStay(Collider other)
         {
             CheckAttackCollision(other.gameObject);
