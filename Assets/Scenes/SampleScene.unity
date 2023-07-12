@@ -1321,6 +1321,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2978667761321727212, guid: f363d0a2ac812be479480856a4604436, type: 3}
+      propertyPath: m_text
+      value: +30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978667761888141303, guid: f363d0a2ac812be479480856a4604436, type: 3}
+      propertyPath: m_text
+      value: x5
+      objectReference: {fileID: 0}
     - target: {fileID: 7846716020269951788, guid: f363d0a2ac812be479480856a4604436, type: 3}
       propertyPath: collectibleItem
       value: 
@@ -1328,7 +1336,7 @@ PrefabInstance:
     - target: {fileID: 7846716020842815543, guid: f363d0a2ac812be479480856a4604436, type: 3}
       propertyPath: collectibleItem
       value: 
-      objectReference: {fileID: 11400000, guid: 5a4d19905a8f63a4a88f2794ebe76f26, type: 2}
+      objectReference: {fileID: 11400000, guid: a478684174d56434cbb0f47947ce3c11, type: 2}
     - target: {fileID: 8432227755345526980, guid: f363d0a2ac812be479480856a4604436, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -1789,11 +1797,11 @@ PrefabInstance:
     - target: {fileID: 7846716020269951788, guid: f363d0a2ac812be479480856a4604436, type: 3}
       propertyPath: collectibleItem
       value: 
-      objectReference: {fileID: 11400000, guid: ca502021e91651041ab0bf6d602cdc1f, type: 2}
+      objectReference: {fileID: 11400000, guid: 5dbefcedd0209264689de189d60e50f3, type: 2}
     - target: {fileID: 7846716020842815543, guid: f363d0a2ac812be479480856a4604436, type: 3}
       propertyPath: collectibleItem
       value: 
-      objectReference: {fileID: 11400000, guid: 5a4d19905a8f63a4a88f2794ebe76f26, type: 2}
+      objectReference: {fileID: 11400000, guid: 4a081ade5d0d28f4b8be77865d62ac46, type: 2}
     - target: {fileID: 8432227755345526980, guid: f363d0a2ac812be479480856a4604436, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -3051,11 +3059,11 @@ PrefabInstance:
     - target: {fileID: 7846716020269951788, guid: f363d0a2ac812be479480856a4604436, type: 3}
       propertyPath: collectibleItem
       value: 
-      objectReference: {fileID: 11400000, guid: a478684174d56434cbb0f47947ce3c11, type: 2}
+      objectReference: {fileID: 11400000, guid: 5dbefcedd0209264689de189d60e50f3, type: 2}
     - target: {fileID: 7846716020842815543, guid: f363d0a2ac812be479480856a4604436, type: 3}
       propertyPath: collectibleItem
       value: 
-      objectReference: {fileID: 11400000, guid: 87f4c6072e94d034ea00d912ac259028, type: 2}
+      objectReference: {fileID: 11400000, guid: 4a081ade5d0d28f4b8be77865d62ac46, type: 2}
     - target: {fileID: 8432227755345526980, guid: f363d0a2ac812be479480856a4604436, type: 3}
       propertyPath: m_RootOrder
       value: 15
