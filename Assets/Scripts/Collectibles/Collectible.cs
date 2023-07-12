@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -8,9 +9,28 @@ namespace Collectibles
     public class Collectible : MonoBehaviour
     {
          public CollectibleItem collectibleItem;
-         
-       
-        
+         public CollectibleGroupController collectibleGroupController;
+         private CollectibleController _collectibleController;
+
+         private void Awake()
+         {
+             collectibleGroupController = transform.parent.GetComponent<CollectibleGroupController>();
+         }
+
+         private void OnTriggerEnter(Collider other)
+         {
+            
+             if (other.gameObject.TryGetComponent(out _collectibleController) && collectibleGroupController.canCollected)
+             {
+                 foreach (Transform child in transform)
+                 {
+                     child.gameObject.SetActive(false);
+                 }
+             }
+             
+             
+         }
+
          private void OnValidate()
          {
 #if UNITY_EDITOR

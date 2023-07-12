@@ -17,8 +17,9 @@ namespace Collectibles
         private void OnTriggerEnter(Collider other)
         {
             Collectible collectible;
-            if (other.gameObject.TryGetComponent(out collectible))
+            if (other.gameObject.TryGetComponent(out collectible) && collectible.collectibleGroupController.canCollected)
             {
+                collectible.collectibleGroupController.canCollected = false;
                 Collect(other.transform);
             }
            
@@ -40,7 +41,7 @@ namespace Collectibles
                     _collectibleManager.AddAmount(collectibleItem.collectibleValue); 
                     break;
                 case CollectibleItem.CollectibleType.Multiplier:
-                    _collectibleManager.AddAmount(collectibleItem.collectibleValue * PlayerManager.Instance.playerList.Count);
+                    _collectibleManager.AddAmount((collectibleItem.collectibleValue * PlayerManager.Instance.playerList.Count)/collectibleItem.collectibleValue);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
