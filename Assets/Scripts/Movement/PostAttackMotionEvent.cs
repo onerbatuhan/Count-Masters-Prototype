@@ -26,7 +26,7 @@ namespace Movement
             GameObject targetPlayer = FindFarthestPlayer();
             Vector3 targetPosition = GetTargetPosition(targetPlayer);
 
-            float moveDuration = 0.5f;
+            float moveDuration = 0.3f;
             _playerManager.playersMovedObject.transform.DOMove(targetPosition, moveDuration).OnUpdate(() =>
             {
                 MovePlayersToTarget(targetPosition);

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe97407057e19134e84cca8cfd59d315, type: 3}
   m_Name: MovementData
   m_EditorClassIdentifier: 
-  playerSpeed: 3.5
+  playerSpeed: 4
   swerveSpeed: 50
   swerveAmount: 35
   transitionSpeed: 8
