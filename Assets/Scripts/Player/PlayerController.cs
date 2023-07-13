@@ -7,7 +7,6 @@ namespace Player
     {
         
         [HideInInspector] public bool fallIsControllable;
-         public int stepCount;
         private PlayerManager _playerManager;
        
         private void Start()

@@ -28,28 +28,22 @@ namespace Player
 
         private void OnTriggerStay(Collider other)
         {
-            if (!isTriggerStayDisabled)
-            {
-                CheckAttackCollision(other.gameObject);
-                CheckAttackFinished(other.gameObject);
-            }
-            
+            if (isTriggerStayDisabled) return;
+            CheckAttackCollision(other.gameObject);
+            CheckAttackFinished(other.gameObject);
+
         }
         public void CheckAttackCollision(GameObject collidingObject)
         {
-            if (collidingObject.TryGetComponent(out _enemyAttackController))
-            {
-              
-                StartAttack();
-                TargetAttack(collidingObject.transform);
-            }
+            if (!collidingObject.TryGetComponent(out _enemyAttackController)) return;
+            StartAttack();
+            TargetAttack(collidingObject.transform);
         }
 
         public void StartAttack()
         {
             _swerveController.speed = 0;
-            // _swerveController.StopSwerving();
-           _swerveController.SwervingClosing();
+            _swerveController.SwervingClosing();
         }
 
         public void CheckAttackFinished(GameObject collidingObject)

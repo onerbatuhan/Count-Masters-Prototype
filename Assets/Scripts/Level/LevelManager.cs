@@ -5,6 +5,7 @@ using Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utilities;
+using Random = UnityEngine.Random;
 
 namespace Level
 {
@@ -41,7 +42,16 @@ namespace Level
         
         public void NextLevelClickEvent()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+            {
+                SceneManager.LoadScene(nextSceneIndex);
+            }
+            else
+            {
+                int randomSceneIndex = Random.Range(0, SceneManager.sceneCountInBuildSettings);
+                SceneManager.LoadScene(randomSceneIndex);
+            }
         }
 
         public void ReturnLevelClickEvent()

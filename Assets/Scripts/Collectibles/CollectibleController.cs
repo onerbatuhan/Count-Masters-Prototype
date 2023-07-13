@@ -17,12 +17,10 @@ namespace Collectibles
         private void OnTriggerEnter(Collider other)
         {
             Collectible collectible;
-            if (other.gameObject.TryGetComponent(out collectible) && collectible.collectibleGroupController.canCollected)
-            {
-                collectible.collectibleGroupController.canCollected = false;
-                Collect(other.transform);
-            }
-           
+            if (!other.gameObject.TryGetComponent(out collectible) || !collectible.collectibleGroupController.canCollected) return;
+            collectible.collectibleGroupController.canCollected = false;
+            Collect(other.transform);
+
         }
 
         private void Collect(Transform currentCollectible)

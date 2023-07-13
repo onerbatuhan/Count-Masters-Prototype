@@ -11,8 +11,8 @@ namespace Enemy
         [SerializeField] private GameObject referenceObject;
         [SerializeField] private int enemyCount;
         [SerializeField] private Transform parentTransform;
-        private float smallCircleRadius = .3f;
-        private float smallCircleSpacing = 1;
+        private float _smallCircleRadius = .3f;
+        private float _smallCircleSpacing = 1;
         private GameObject _enemyGroupObject;
         
         
@@ -50,15 +50,15 @@ namespace Enemy
 #if UNITY_EDITOR
             Handles.color = Color.red;
             float angleStep = 360f / enemyCount;
-            float totalSpacing = smallCircleSpacing * (enemyCount - 1);
-            float adjustedRadius = smallCircleRadius + smallCircleSpacing;
+            float totalSpacing = _smallCircleSpacing * (enemyCount - 1);
+            float adjustedRadius = _smallCircleRadius + _smallCircleSpacing;
 
             Quaternion rotation = Quaternion.AngleAxis(angleStep, transform.up);
             Vector3 direction = transform.forward * adjustedRadius;
 
             for (int i = 0; i < enemyCount; i++)
             {
-                Handles.DrawWireDisc(transform.position + direction, transform.up, smallCircleRadius);
+                Handles.DrawWireDisc(transform.position + direction, transform.up, _smallCircleRadius);
                 direction = rotation * direction;
             }
 #endif

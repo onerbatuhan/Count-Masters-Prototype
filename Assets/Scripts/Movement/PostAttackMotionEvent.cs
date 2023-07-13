@@ -7,7 +7,7 @@ namespace Movement
 {
     public class PostAttackMotionEvent : MonoBehaviour
     {
-        
+        [SerializeField] private float moveDuration = .3f;
         private PlayerManager _playerManager;
         private SwerveController _swerveController;
         private PlayerAttackController _playerAttackController;
@@ -25,8 +25,7 @@ namespace Movement
 
             GameObject targetPlayer = FindFarthestPlayer();
             Vector3 targetPosition = GetTargetPosition(targetPlayer);
-
-            float moveDuration = 0.3f;
+            
             _playerManager.playersMovedObject.transform.DOMove(targetPosition, moveDuration).OnUpdate(() =>
             {
                 MovePlayersToTarget(targetPosition);

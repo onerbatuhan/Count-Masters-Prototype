@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
+
 using System.Linq;
 using Animation;
 using Attack;
-using Level;
 using Player;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Enemy
 {
