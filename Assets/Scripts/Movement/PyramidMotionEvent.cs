@@ -27,7 +27,6 @@ namespace Movement
         {
             int objectCount = PlayerManager.Instance.playerList.Count;
             int maxRows = Mathf.CeilToInt(Mathf.Sqrt(2 * objectCount));
-            Debug.Log(maxRows);
             float height = initialHeight;
             int objectIndex = 0;
 
@@ -49,26 +48,7 @@ namespace Movement
                 objectCount -= objectsInRow;
                 yield return new WaitForSeconds(0.1f);
             }
-
-            // Place the remaining objects
-            if (objectIndex < objectCount)
-            {
-                List<int> availableIndices = new List<int>();
-                for (int i = objectIndex; i < objectCount; i++)
-                {
-                    availableIndices.Add(i);
-                }
-
-                for (int i = objectIndex; i < objectCount; i++)
-                {
-                    GameObject obj = PlayerManager.Instance.playerList[i];
-                    int randomIndex = Random.Range(0, availableIndices.Count);
-                    int replacementIndex = availableIndices[randomIndex];
-                    availableIndices.RemoveAt(randomIndex);
-                    GameObject replacementObj = PlayerManager.Instance.playerList[replacementIndex];
-                    obj.transform.localPosition = replacementObj.transform.localPosition;
-                }
-            }
+           
         }
     }
 }

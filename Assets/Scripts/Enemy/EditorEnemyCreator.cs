@@ -10,9 +10,11 @@ namespace Enemy
     {
         [SerializeField] private GameObject referenceObject;
         [SerializeField] private int enemyCount;
+        [SerializeField] private Transform parentTransform;
         private float smallCircleRadius = .3f;
         private float smallCircleSpacing = 1;
         private GameObject _enemyGroupObject;
+        
         
 
         private void OnDrawGizmos()
@@ -64,7 +66,7 @@ namespace Enemy
 
         private void CreateEnemyGroup()
         {
-            _enemyGroupObject = Instantiate(referenceObject);
+            _enemyGroupObject = Instantiate(referenceObject,parentTransform);
             _enemyGroupObject.GetComponent<EnemyController>().enemyCount = enemyCount;
             _enemyGroupObject.transform.position = transform.position;
         }

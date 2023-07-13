@@ -20,15 +20,17 @@ namespace Obstacles
 
         private void OnTriggerEnter(Collider other)
         {
-            if (PlayerManager.Instance.playerList.Count !< 1) return;
+            
             if (!other.gameObject.TryGetComponent(out _playerController)) return;
+            QueryPlayerScore();
+            if (PlayerManager.Instance.playerList.Count !< 1) return;
             other.transform.SetParent(null);
             _playerManager.RemovePlayerList(other.gameObject);
             Animator animator = other.gameObject.GetComponent<Animator>();
             Rigidbody rigidbody = other.GetComponent<Rigidbody>();
             _animationController.ChangeAnimation(AnimationController.AnimationType.Idle,animator);
             rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            QueryPlayerScore();
+            
 
         }
 
